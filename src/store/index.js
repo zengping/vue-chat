@@ -5,7 +5,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import wechat from './wechat'
-import left from './left'
+import global from './global'
 import right from './right'
 
 Vue.use(Vuex)
@@ -17,7 +17,7 @@ let status = {
 }
 
 status = objAdd(status, wechat)
-status = objAdd(status, left)
+status = objAdd(status, global)
 status = objAdd(status, right)
 
 function objAdd (a, b) {

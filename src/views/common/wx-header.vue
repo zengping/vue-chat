@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import io from '../../../lib/socket.io'
+  // import io from '../../../lib/socket.io'
   export default {
     data () {
       return {
@@ -30,21 +30,21 @@
     },
     methods: {
       connectEvent () {
-        var me = this
-        var randomNum = Math.floor(Math.random() * 10)
-        this.userInfo = {
-          userId: this.getUserId(),
-          userName: this.userNameList[randomNum],
-          userImg: randomNum + 1
-        }
-        this.httpServer = io.connect('http://localhost:8888')
-        this.httpServer.emit('login', this.userInfo)
-        this.onlineUserList.push(this.userInfo)
-        this.httpServer.on('login', function (obj) {
-          console.log(obj)
-          me.onlineUserList = obj.onlineUserList
-          me.messageList.push({ type: 1, msg: '用户 ' + obj.msgUser.userName + ' 加入聊天', msgUser: obj.msgUser })
-        })
+        // var me = this
+        // var randomNum = Math.floor(Math.random() * 10)
+        // this.userInfo = {
+        //   userId: this.getUserId(),
+        //   userName: this.userNameList[randomNum],
+        //   userImg: randomNum + 1
+        // }
+        // this.httpServer = io.connect('http://localhost:8888')
+        // this.httpServer.emit('login', this.userInfo)
+        // this.onlineUserList.push(this.userInfo)
+        // this.httpServer.on('login', function (obj) {
+        //   console.log(obj)
+        //   me.onlineUserList = obj.onlineUserList
+        //   me.messageList.push({ type: 1, msg: '用户 ' + obj.msgUser.userName + ' 加入聊天', msgUser: obj.msgUser })
+        // })
       },
       getUserId () {
         return (new Date().getTime() + '' + Math.floor(Math.random() * 100000 + 100)) - 0
