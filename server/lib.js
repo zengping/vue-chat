@@ -16,7 +16,7 @@ module.exports = {
         // });
         var postData = {};
         var form = new formidable.IncomingForm();
- 
+
         await form.parse(request, function(err, fields, files) {
             postData = fields;
         });

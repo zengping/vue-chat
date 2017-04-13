@@ -3,8 +3,9 @@ import Router from 'vue-router'
 import http from '../http'
 import filters from '../filters'
 import App from 'App'
-// import Home from 'views/Home'
-// import Second from 'views/Second'
+import Contact from 'views/contact/Contact'
+import Explore from 'views/explore/Explore'
+import Self from 'views/self/Self'
 
 Vue.use(Router)
 filters.init(Vue)
@@ -21,10 +22,18 @@ export default new Router({
         //   path: '',
         //   component: Home
         // },
-        // {
-        //   path: '/:second',
-        //   component: Second
-        // }
+        {
+          path: '/contact',
+          component: Contact
+        },
+        {
+          path: '/explore',
+          component: Explore
+        },
+        {
+          path: '/self',
+          component: Self
+        }
       ]
     }
   ]
