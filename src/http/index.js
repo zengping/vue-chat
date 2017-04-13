@@ -33,12 +33,26 @@ export default {
   },
   xhr (o) {
     return new Promise((resolve, reject) => {
-      axios[o.type](this.getUrl(o), o.params).then((res) => {
+      let config = {
+        headers: {
+          'Content-type': 'application/json'
+        }
+      }
+      let params
+      if (o.type === 'post') {
+        params = new FormData()
+        for (let i in o.params) {
+          params.append(i, o.params[i])
+        }
+      } else {
+        params = o.params
+      }
+      axios[o.type](this.getUrl(o), params, config).then((res) => {
         if (res.data.status.code === 200) {
-          resolve(res.data)
+          resolve(res.data.data)
         } else {
           // reject(res.data.status.message)
-          reject(res)
+          reject(res.data.status.msg)
         }
       }).catch((err) => {
         reject(err)

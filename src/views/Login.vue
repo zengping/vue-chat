@@ -40,15 +40,15 @@
           if (valid) {
             this.logining = true
             var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass }
-            this.$http.post({url: 'http://localhost:8888/user/login', params: loginParams}).then(data => {
+            this.$http.post({api: '/api/user/login', params: loginParams}).then(data => {
               this.logining = false
-              let { msg, code, user } = data
-              if (code !== 200) {
+              if (data.length === 0) {
                 this.$message({
-                  message: msg,
+                  message: '用户名或者密码错误！',
                   type: 'error'
                 })
               } else {
+                let user = data[0]
                 sessionStorage.setItem('user', JSON.stringify(user))
                 window.location.href = 'index.html'
               }

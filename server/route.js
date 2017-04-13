@@ -7,13 +7,16 @@ async function route(request, response) {
     var routes = path.pathname.split("/");
     response.okMsg = okMsg();
     response.errMsg = errMsg();
-    if (routes[1] && routes[2] && handle[routes[1]] && handle[routes[1]][routes[2]]) {
+    let basePath = routes[1];
+    let ctrl = routes[2];
+    let action = routes[3];
+    if (basePath == 'api' && ctrl && action && handle[ctrl] && handle[ctrl][action]) {
         response.writeHead(200, {"Content-Type": "application/json;charset=utf-8"});
         try {
             if (request.method == 'POST') {
                 request.postData = await lib.getPost(request);
             }
-            let data = await handle[routes[1]][routes[2]](request, response, routes);
+            let data = await handle[ctrl][action](request, response, routes);
             response.serverStatus = 1;
             response.okMsg.data = data;
         } catch(e) {

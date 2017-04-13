@@ -28,8 +28,8 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/sockets': {
-        target: 'http://localhost:8085'
+      '/api': {
+        target: 'http://localhost:8888'
         // pathRewrite: {'^/api' : '/masking'}
       }
     },

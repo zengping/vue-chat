@@ -37,7 +37,7 @@
       },
       methods: {
         checkLogin () {
-          let user = sessionStorage.userInfo ? JSON.parse(sessionStorage.userInfo) : null
+          let user = sessionStorage.user ? JSON.parse(sessionStorage.user) : null
           if (user) {
             this.user = user
           } else {
