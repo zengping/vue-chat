@@ -4,7 +4,7 @@
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
-import head from './head'
+import wechat from './wechat'
 import left from './left'
 import right from './right'
 
@@ -16,7 +16,7 @@ let status = {
   actions: {}
 }
 
-status = objAdd(status, head)
+status = objAdd(status, wechat)
 status = objAdd(status, left)
 status = objAdd(status, right)
 

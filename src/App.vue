@@ -19,8 +19,8 @@
 </template>
 
 <script>
-    import WxHeader from './components/common/wx-header'
-    import WxNav from './components/common/wx-nav'
+    import WxHeader from './views/common/wx-header'
+    import WxNav from './views/common/wx-nav'
     export default {
       name: 'app',
       components: {
