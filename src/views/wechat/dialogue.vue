@@ -64,6 +64,7 @@
         </div>
         <span class="expression iconfont icon-dialogue-smile"></span>
         <span class="more iconfont icon-dialogue-jia"></span>
+        <button class="weui_btn_primary">发送</button>
         <div class="recording"
              style="display: none;"
              id="recording">
@@ -103,7 +104,8 @@ export default {
     return {
       pageName: this.$route.query.name,
       currentChatWay: true, // ture为键盘打字 false为语音输入
-      timer: null
+      timer: null,
+      sendStatus: false   // 有内容才可以发送
       // sayActive: false // false 键盘打字 true 语音输入
     }
   },

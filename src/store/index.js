@@ -6,7 +6,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import wechat from './wechat'
 import global from './global'
-import right from './right'
+import self from './self'
+import contact from './contact'
 
 Vue.use(Vuex)
 
@@ -18,7 +19,8 @@ let status = {
 
 status = objAdd(status, wechat)
 status = objAdd(status, global)
-status = objAdd(status, right)
+status = objAdd(status, self)
+status = objAdd(status, contact)
 
 function objAdd (a, b) {
   Object.keys(a).forEach((o) => {

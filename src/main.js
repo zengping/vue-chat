@@ -4,6 +4,7 @@ import Vue from 'vue'
 import router from './router'
 import store from './store'
 
+Vue.config.productionTip = false // 将此值设置为 false ,会关闭 Vue 启动时的提示信息，推荐
 /* eslint-disable no-new */
 
 new Vue({

@@ -213,7 +213,7 @@ const contacts = [{ // 昵称备注都有的朋友
     'picUrl': ''
   }
 }, {
-  'wxid': 'wxid_zhenji',
+  'wxid': '9',
   'initial': 'z',
   'headerUrl': 'https://sinacloud.net/vue-wechat/images/headers/zhenji.jpg',
   'nickname': '甄姬',

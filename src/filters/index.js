@@ -1,6 +1,7 @@
 export default {
   init (Vue) {
     Vue.filter('timeFormat', this.timeFormat)
+    Vue.filter('fmtDate', this.fmtDate)
   },
   timeFormat (time) {
     let date = new Date(parseInt(time) * 1000)

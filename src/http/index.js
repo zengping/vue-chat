@@ -19,7 +19,7 @@ export default {
   getUrl (o) {
     let uri = o.api
     if (o.type === 'get' && Object.keys(o.params).length > 0) {
-      uri = uri + '&' + this.joinP(o.params)
+      uri = uri + '?' + this.joinP(o.params)
     }
     return uri
   },

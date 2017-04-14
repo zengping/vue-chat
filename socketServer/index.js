@@ -18,11 +18,11 @@ io.on('connection', function (socket) {
 
   //监听新用户加入
   socket.on('login', function (obj) {
-    socket.socketId = obj.userId;
+    socket.socketId = obj.id;
     //检查在线列表，如果不在里面就加入
     var sign = false;
     for (var i = 0; i < onlineUserList.length; i++) {
-      if (obj.userId === onlineUserList[i].userId) {
+      if (obj.id === onlineUserList[i].id) {
         sign = true;
         break;
       }
@@ -30,9 +30,8 @@ io.on('connection', function (socket) {
 
     if (!sign) onlineUserList.push(obj);
     //向除自己以外的所有客户端广播:有新用户加入
-    this.broadcast.emit('login', { onlineUserList: onlineUserList, onlineUserCount: onlineUserCount, msgUser: obj });
-    this.emit('loginSuccess', { onlineUserList: onlineUserList, sign: 1 });
-    console.log(obj.userName + '加入了群聊');
+    // this.broadcast.emit('login', { onlineUserList: onlineUserList, onlineUserCount: onlineUserCount, msgUser: obj });
+    // this.emit('loginSuccess', { onlineUserList: onlineUserList, sign: 1 });
   });
 
   //监听用户退出
@@ -65,11 +64,9 @@ io.on('connection', function (socket) {
 
   //监听用户发布聊天内容
   socket.on('message', function (obj) {
-    obj.onlineUserList = onlineUserList;
-    this.broadcast.emit('message', obj); // 广播给自己以外的所有用户
-    console.log(obj.user.userName + '说：' + obj.msg);
+    io.sockets.socket(obj.to_id).emit('message', obj.msg);
   });
-  
+
 });
 
-app.listen(8888);
+app.listen(8886);

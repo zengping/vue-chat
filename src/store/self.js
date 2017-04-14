@@ -1,10 +1,10 @@
 export default {
   state: {
-    rightApi: {}
+    user: {}
   },
   mutations: {
-    setRight (state, i) {
-      state.rightApi = i
+    setUser (state, user) {
+      state.user = user
     },
     setRightNull (state) {
       state.rightApi = {}

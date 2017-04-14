@@ -5,6 +5,7 @@ var lib = require("./lib");
 async function route(request, response) {
     var path = url.parse(request.url, true);
     var routes = path.pathname.split("/");
+    var query = path.query;
     response.okMsg = okMsg();
     response.errMsg = errMsg();
     let basePath = routes[1];
@@ -16,7 +17,7 @@ async function route(request, response) {
             if (request.method == 'POST') {
                 request.postData = await lib.getPost(request);
             }
-            let data = await handle[ctrl][action](request, response, routes);
+            let data = await handle[ctrl][action](request, response, {routes, query});
             response.serverStatus = 1;
             response.okMsg.data = data;
         } catch(e) {

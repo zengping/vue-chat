@@ -37,25 +37,21 @@
         </router-link>
       </div>
       <!--联系人集合-->
-      <template v-for="(value,key) in contactsList">
         <!--首字母-->
-        <div class="weui-cells__title">{{key}}</div>
         <div class="weui-cells">
-          <router-link :key="item.wxid"
-                       :to="{path:'/contact/details',query:{wxid:item.wxid}}"
+          <router-link :key="item.id"
+                       :to="{path:'/contact/details',query:{wxid:item.id}}"
                        class="weui-cell weui-cell_access"
-                       v-for="item in value"
+                       v-for="item in contactsList"
                        tag="div">
             <div class="weui-cell__hd">
-              <img :src="item.headerUrl"
+              <img :src="item.header_url"
                    class="home__mini-avatar___1nSrW">
             </div>
             <div class="weui-cell__bd">
               {{item.remark?item.remark:item.nickname}}
             </div>
           </router-link>
-        </div>
-      </template>
     </section>
     <!--首字母排序 后期需要实现检索功能-->
     <div class="initial-bar"><span v-for="i in contactsInitialList">{{i}}</span></div>
@@ -81,7 +77,8 @@ export default {
       return this.$store.getters.contactsInitialList
     },
     contactsList () {
-      return this.$store.getters.contactsList
+      console.log(this.$store.state.contactsList)
+      return this.$store.state.contactsList
     }
   }
 }
