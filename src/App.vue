@@ -39,7 +39,7 @@ export default {
       leaveAnimate: '' // 页面离开动效
     }
   },
-  mounted () {
+  beforeMount () {
     this.checkLogin()
   },
   methods: {
@@ -47,17 +47,26 @@ export default {
       let user = sessionStorage.user ? JSON.parse(sessionStorage.user) : null
       if (user) {
         this.$store.commit('setUser', user)
+        this.io.login(user)
         this.getContacts()
+        this.getChat()
       } else {
         window.location.href = 'login.html'
       }
     },
     getContacts () {
       let uid = this.$store.state.user.id
+      let self = this
       this.$http.get({ api: '/api/contacts/list', params: {uid: uid} }).then((data) => {
-        this.$store.commit('setContactsList', data)
+        self.$store.commit('setContactsList', data)
       }, (res) => {
 
+      })
+    },
+    getChat () {
+      let self = this
+      this.io.receive((chat) => {
+        self.$store.commit('setChatList', chat)
       })
     }
   },

@@ -52,9 +52,8 @@
               {{item.remark?item.remark:item.nickname}}
             </div>
           </router-link>
+        </div>
     </section>
-    <!--首字母排序 后期需要实现检索功能-->
-    <div class="initial-bar"><span v-for="i in contactsInitialList">{{i}}</span></div>
   </div>
 </template>
 
@@ -65,19 +64,8 @@ export default {
       'pageName': '通讯录'
     }
   },
-  mounted () {
-    // mutations.js中有介绍
-    this.$store.commit('toggleTipsStatus', -1)
-  },
-  activated () {
-    this.$store.commit('toggleTipsStatus', -1)
-  },
   computed: {
-    contactsInitialList () {
-      return this.$store.getters.contactsInitialList
-    },
     contactsList () {
-      console.log(this.$store.state.contactsList)
       return this.$store.state.contactsList
     }
   }

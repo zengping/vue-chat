@@ -1,76 +1,46 @@
 <template>
   <div class="dialogue">
     <header id="wx-header">
-      <div class="other">
-        <router-link :to="{path:'/wechat/dialogue/dialogue-info',query: { msgInfo: msgInfo}}"
-                     tag="span"
-                     class="iconfont icon-chat-group"
-                     v-show="$route.query.group_num&&$route.query.group_num!=1"></router-link>
-        <router-link :to="{path:'/wechat/dialogue/dialogue-detail',query: { msgInfo: msgInfo}}"
-                     tag="span"
-                     class="iconfont icon-chat-friends"
-                     v-show="$route.query.group_num==1"></router-link>
-      </div>
       <div class="center">
-        <router-link to="/"
-                     tag="div"
-                     class="iconfont icon-return-arrow">
+        <router-link to="/" tag="div" class="iconfont icon-return-arrow">
           <span>微信</span>
         </router-link>
         <span>{{pageName}}</span>
-        <span class="parentheses"
-              v-show='$route.query.group_num&&$route.query.group_num!=1'>{{$route.query.group_num}}</span>
+        <span class="parentheses" v-show='$route.query.group_num&& $route.query.group_num!=1'>{{$route.query.group_num}}</span>
       </div>
     </header>
-    <section class="dialogue-section clearfix"
-             v-on:click="MenuOutsideClick">
-      <div class="row clearfix"
-           v-for="item in msgInfo.msg">
-        <img :src="item.headerUrl"
-             class="header">
-        <p class="text"
-           v-more>{{item.text}}</p>
+    <section class="dialogue-section clearfix" v-on:click="MenuOutsideClick">
+      <div class="row clearfix" v-for="item in chatList.msg" v-if="chatList">
+        <img :src="item.header_url" class="header">
+        <p class="text" v-more>{{item.text}}</p>
       </div>
-      <span class="msg-more"
-            id="msg-more"><ul>
-                      <li>复制</li>
-                      <li>转发</li>
-                      <li>收藏</li>
-                      <li>删除</li>
-                  </ul></span>
+      <span class="msg-more" id="msg-more">
+        <ul>
+            <li>复制</li>
+            <li>转发</li>
+            <li>收藏</li>
+            <li>删除</li>
+        </ul>
+      </span>
     </section>
     <footer class="dialogue-footer">
       <div class="component-dialogue-bar-person">
-        <span class="iconfont icon-dialogue-jianpan"
-              v-show="!currentChatWay"
-              v-on:click="currentChatWay=true"></span>
-        <span class="iconfont icon-dialogue-voice"
-              v-show="currentChatWay"
-              v-on:click="currentChatWay=false"></span>
-        <div class="chat-way"
-             v-show="!currentChatWay">
-          <div class="chat-say"
-               v-press>
+        <span class="iconfont icon-dialogue-jianpan" v-show="!currentChatWay" v-on:click="currentChatWay=true"></span>
+        <span class="iconfont icon-dialogue-voice" v-show="currentChatWay" v-on:click="currentChatWay=false"></span>
+        <div class="chat-way" v-show="!currentChatWay">
+          <div class="chat-say" v-press>
             <span class="one">按住 说话</span>
             <span class="two">松开 结束</span>
           </div>
         </div>
-        <div class="chat-way"
-             v-show="currentChatWay">
-          <input class="chat-txt"
-                 type="text"
-                 v-on:focus="focusIpt"
-                 v-on:blur="blurIpt" />
+        <div class="chat-way" v-show="currentChatWay">
+          <input class="chat-txt" type="text" v-model="newMsg" v-on:focus="focusIpt" v-on:blur="blurIpt" v-on:input="inputIpt" />
         </div>
         <span class="expression iconfont icon-dialogue-smile"></span>
-        <span class="more iconfont icon-dialogue-jia"></span>
-        <button class="weui_btn_primary">发送</button>
-        <div class="recording"
-             style="display: none;"
-             id="recording">
-          <div class="recording-voice"
-               style="display: none;"
-               id="recording-voice">
+        <span class="more iconfont icon-dialogue-jia" v-show="!sendStatus"></span>
+        <button class="weui-btn weui-btn_primary" v-show="sendStatus" style="width:16%;margin-top:3px;margin-right:4px;padding:0 3px;line-height:33px;font-size:16px;" @click="sendMsg">发送</button>
+        <div class="recording" style="display: none;" id="recording">
+          <div class="recording-voice" style="display: none;" id="recording-voice">
             <div class="voice-inner">
               <div class="voice-icon"></div>
               <div class="voice-volume">
@@ -87,8 +57,7 @@
             </div>
             <p>手指上划,取消发送</p>
           </div>
-          <div class="recording-cancel"
-               style="display: none;">
+          <div class="recording-cancel" style="display: none;">
             <div class="cancel-inner"></div>
             <p>松开手指,取消发送</p>
           </div>
@@ -105,23 +74,22 @@ export default {
       pageName: this.$route.query.name,
       currentChatWay: true, // ture为键盘打字 false为语音输入
       timer: null,
+      newMsg: '',
+      chatList: this.$store.state.chatList[this.$route.query.wxid] ? this.$store.state.chatList[this.$route.query.wxid] : false,
+      contact_id: this.$route.query.wxid,
       sendStatus: false   // 有内容才可以发送
       // sayActive: false // false 键盘打字 true 语音输入
+    }
+  },
+  computed: {
+    user () {
+      return this.$store.state.user
     }
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
       vm.$store.commit('setPageName', vm.$route.query.name)
     })
-  },
-  computed: {
-    msgInfo () {
-      for (var i in this.$store.state.msgList.baseMsg) {
-        if (this.$store.state.msgList.baseMsg[i].mid === Number(this.$route.query.mid)) {
-          return this.$store.state.msgList.baseMsg[i]
-        }
-      }
-    }
   },
   directives: {
     press: {
@@ -199,12 +167,16 @@ export default {
   methods: {
     // 解决输入法被激活时 底部输入框被遮住问题
     focusIpt () {
-      this.timer = setInterval(function () {
-        document.body.scrollTop = document.body.scrollHeight
-      }, 100)
     },
     blurIpt () {
       clearInterval(this.timer)
+    },
+    inputIpt () {
+      if (this.newMsg === '') {
+        this.sendStatus = false
+      } else {
+        this.sendStatus = true
+      }
     },
     // 点击空白区域，菜单被隐藏
     MenuOutsideClick (e) {
@@ -216,7 +188,23 @@ export default {
       } else {
         msgMore.style.display = 'none'
       }
+    },
+    sendMsg () {
+      let chat = {from_id: this.user.id, to_id: this.contact_id, msg: this.newMsg}
+      this.io.send(chat)
+      this.$store.commit('setChatList', chat)
+      this.clearSendStatus()
+    },
+    clearSendStatus () {
+      this.sendStatus = false
+      this.newMsg = ''
     }
+  },
+  mounted () {
+    let self = this
+    this.io.receive((chat) => {
+      self.chatList = self.$store.state.chatList[self.contact_id]
+    })
   }
 }
 </script>

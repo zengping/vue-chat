@@ -13,6 +13,7 @@ Vue.use(Vuex)
 
 let status = {
   state: {},
+  getters: {},
   mutations: {},
   actions: {}
 }

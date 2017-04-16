@@ -10,25 +10,28 @@ function handler(req, res) {
 
 //在线用户
 var onlineUserList = [];
+// socket实例栈
+var socketsList = {};
 //当前在线人数
 var onlineUserCount = 0;
 
-io.on('connection', function (socket) {
+io.sockets.on('connection', function (socket) {
   console.log('新连接已创建 !');
 
   //监听新用户加入
   socket.on('login', function (obj) {
-    socket.socketId = obj.id;
+    // socket.socketId = obj.id;
+    socketsList[obj.id] = socket;
     //检查在线列表，如果不在里面就加入
-    var sign = false;
-    for (var i = 0; i < onlineUserList.length; i++) {
-      if (obj.id === onlineUserList[i].id) {
-        sign = true;
-        break;
-      }
-    }
+    // var sign = false;
+    // for (var i = 0; i < onlineUserList.length; i++) {
+    //   if (obj.id === onlineUserList[i].id) {
+    //     sign = true;
+    //     break;
+    //   }
+    // }
 
-    if (!sign) onlineUserList.push(obj);
+    // if (!sign) onlineUserList.push(obj);
     //向除自己以外的所有客户端广播:有新用户加入
     // this.broadcast.emit('login', { onlineUserList: onlineUserList, onlineUserCount: onlineUserCount, msgUser: obj });
     // this.emit('loginSuccess', { onlineUserList: onlineUserList, sign: 1 });
@@ -63,8 +66,10 @@ io.on('connection', function (socket) {
   });
 
   //监听用户发布聊天内容
-  socket.on('message', function (obj) {
-    io.sockets.socket(obj.to_id).emit('message', obj.msg);
+  socket.on('chat', function (obj) {
+    console.log(obj)
+    // socket.emit('chat', obj);
+    socketsList[obj.to_id].emit('chat', obj)
   });
 
 });
