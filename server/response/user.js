@@ -19,7 +19,7 @@ app.prototype = {
     if (r.length > 0) {
       throw new Error("该用户已经存在");
     } else {
-      s = `insert into user (username, password, nickname) values("${p.username}", "${p.password}", "${p.nickname}")`;
+      s = `insert into user (username, password, nickname, header_url, country, area) values("${p.username}", "${p.password}", "${p.nickname}", "${p.header_url}", "${p.country}", "${p.area}")`;
     }
     return await sql.query(s);
   }
