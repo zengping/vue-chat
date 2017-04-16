@@ -37,7 +37,10 @@
         user: {
           nickname: '',
           username: '',
-          password: ''
+          password: '',
+          header_url: './static/assets/images/default.png',
+          country: '中国',
+          area: '北京'
         }
       }
     },
@@ -45,7 +48,7 @@
       registor () {
         let self = this
         if (!this.valid()) {
-          this.$store.commit('setJalertMsg', '请填写完整信息')
+          this.$store.commit('setJalertText', '请填写完整信息')
           return
         }
         this.$store.commit('showLoading')

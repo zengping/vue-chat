@@ -11,21 +11,21 @@
         </header>
         <section>
             <div class="weui-cells">
-                <router-link to="/self/settings/security" class="weui-cell weui-cell_access">
+                <router-link to="/self/security" class="weui-cell weui-cell_access">
                     <div class="weui-cell__bd">帐号与安全</div>
                     <div class="weui-cell__ft">已保护</div>
                 </router-link>
             </div>
             <div class="weui-cells">
-                <router-link to="/self/settings/notice" class="weui-cell weui-cell_access">
+                <router-link to="/self/notice" class="weui-cell weui-cell_access">
                     <div class="weui-cell__bd">新消息通知</div>
                     <div class="weui-cell__ft"></div>
                 </router-link>
-                <router-link to="/self/settings/privacy" class="weui-cell weui-cell_access">
+                <router-link to="/self/privacy" class="weui-cell weui-cell_access">
                     <div class="weui-cell__bd">隐私</div>
                     <div class="weui-cell__ft"></div>
                 </router-link>
-                <router-link to="/self/settings/common" class="weui-cell weui-cell_access">
+                <router-link to="/self/common" class="weui-cell weui-cell_access">
                     <div class="weui-cell__bd">通用</div>
                     <div class="weui-cell__ft"></div>
                 </router-link>

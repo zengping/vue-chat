@@ -15,7 +15,7 @@
                     <p>头像</p>
                 </div>
                 <div class="weui-cell__ft">
-                    <img src="https://sinacloud.net/vue-wechat/images/headers/header01.png" style="width: 50px;height: 50px;border-radius: 4px;">
+                    <img :src="user.header_url" style="width: 50px;height: 50px;border-radius: 4px;">
                 </div>
             </div>
             <div class="weui-cell">
@@ -23,7 +23,7 @@
                     <p>名字</p>
                 </div>
                 <div class="weui-cell__ft">
-                    阿荡
+                    {{user.nickname}}
                 </div>
             </div>
             <div class="weui-cell">
@@ -31,7 +31,7 @@
                     <p>微信号</p>
                 </div>
                 <div class="weui-cell__ft">
-                    10086
+                    {{user.username}}
                 </div>
             </div>
             <router-link to="/self/my-qrcode" class="weui-cell weui-cell_access">
@@ -66,7 +66,7 @@
                     <p>地区</p>
                 </div>
                 <div class="weui-cell__ft">
-                    奥地利 维也纳
+                    {{user.country}} {{user.area}}
                 </div>
             </div>
             <div class="weui-cell">
@@ -98,6 +98,11 @@ export default {
   data () {
     return {
       pageName: '个人信息'
+    }
+  },
+  computed: {
+    user () {
+      return JSON.parse(sessionStorage.getItem('user'))
     }
   }
 }

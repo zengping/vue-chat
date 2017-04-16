@@ -38,7 +38,7 @@
       login () {
         let self = this
         if (!this.valid()) {
-          this.$store.commit('setJalertMsg', '请填写正确信息')
+          this.$store.commit('setJalertText', '请填写正确信息')
           return
         }
         this.$store.commit('showLoading')

@@ -4,16 +4,12 @@
     <div class="weui-tab__content"
          style="display: block;">
       <div class="weui-cells">
-        <router-link to="/self/profile"
-                     class="weui-cell weui-cell_access">
+        <router-link to="/self/profile" class="weui-cell weui-cell_access">
           <div class="weui-cell__hd">
-            <img src="https://sinacloud.net/vue-wechat/images/headers/header01.png"
-                 alt=""
-                 class="self-header">
+            <img :src="user.header_url" alt="" class="self-header">
           </div>
           <div class="weui-cell__bd">
-            <h4 class="self-nickname">阿荡</h4>
-
+            <h4 class="self-nickname">{{user.nickname}}</h4>
             <p class="self-wxid">微信号: zhaohd</p>
           </div>
           <div class="weui-cell__ft">
@@ -22,8 +18,7 @@
         </router-link>
       </div>
       <div class="weui-cells">
-        <router-link to="/self/album"
-                     class="weui-cell weui-cell_access">
+        <router-link to="/self/album" class="weui-cell weui-cell_access">
           <div class="weui-cell__hd">
             <img src="../../assets/images/me_more-my-album.png">
           </div>
@@ -31,8 +26,7 @@
             <p>相册</p>
           </div>
         </router-link>
-        <router-link to="/self/album"
-                     class="weui-cell weui-cell_access">
+        <router-link to="/self/album" class="weui-cell weui-cell_access">
           <div class="weui-cell__hd">
             <img src="../../assets/images/me_more-my-favorites.png">
           </div>
@@ -40,8 +34,7 @@
             <p>收藏</p>
           </div>
         </router-link>
-        <router-link to="/self/album"
-                     class="weui-cell weui-cell_access">
+        <router-link to="/self/album" class="weui-cell weui-cell_access">
           <div class="weui-cell__hd">
             <img src="../../assets/images/me_more-my-bank-card.png">
           </div>
@@ -49,8 +42,7 @@
             <p>钱包</p>
           </div>
         </router-link>
-        <router-link to="/self/album"
-                     class="weui-cell weui-cell_access">
+        <router-link to="/self/album" class="weui-cell weui-cell_access">
           <div class="weui-cell__hd">
             <img src="../../assets/images/me_my-card-package-icon.png">
           </div>
@@ -60,8 +52,7 @@
         </router-link>
       </div>
       <div class="weui-cells">
-        <router-link to="/self/album"
-                     class="weui-cell weui-cell_access">
+        <router-link to="/self/album" class="weui-cell weui-cell_access">
           <div class="weui-cell__hd">
             <img src="../../assets/images/me_more-expression.png">
           </div>
@@ -71,8 +62,7 @@
         </router-link>
       </div>
       <div class="weui-cells">
-        <router-link to="/self/settings"
-                     class="weui-cell weui-cell_access">
+        <router-link to="/self/settings" class="weui-cell weui-cell_access">
           <div class="weui-cell__hd">
             <img src="../../assets/images/me_more-setting.png">
           </div>
@@ -91,6 +81,11 @@ export default {
   data () {
     return {
       'pageName': '我'
+    }
+  },
+  computed: {
+    user () {
+      return JSON.parse(sessionStorage.getItem('user'))
     }
   },
   mounted () {
