@@ -4,11 +4,19 @@ import http from '../http'
 import socket from '../socket'
 import filters from '../filters'
 import App from 'App'
+
 import Wechat from 'views/wechat/Wechat'
-import dialogue from 'views/wechat/dialogue'
+import Dialogue from 'views/wechat/Dialogue'
+
 import Contact from 'views/contact/Contact'
+import Details from 'views/contact/Details'
+
 import Explore from 'views/explore/Explore'
+
 import Self from 'views/self/Self'
+import Profile from 'views/self/Profile'
+import MyQrcode from 'views/self/my-qrcode'
+import Settings from 'views/self/Settings'
 
 Vue.use(Router)
 filters.init(Vue)
@@ -28,7 +36,7 @@ export default new Router({
         },
         {
           path: '/wechat/dialogue',
-          components: { 'subPage': dialogue }
+          components: { 'subPage': Dialogue }
         },
         {
           path: '/contact',
@@ -36,7 +44,7 @@ export default new Router({
         },
         {
           path: '/contact/details',
-          components: { 'subPage': resolve => require(['views/contact/details'], resolve) }
+          components: { 'subPage': Details }
         },
         {
           path: '/explore',
@@ -45,6 +53,18 @@ export default new Router({
         {
           path: '/self',
           component: Self
+        },
+        {
+          path: '/self/profile',
+          components: { 'subPage': Profile }
+        },
+        {
+          path: '/self/my-qrcode',
+          components: { 'subPage': MyQrcode }
+        },
+        {
+          path: '/self/settings',
+          components: { 'subPage': Settings }
         }
       ]
     }

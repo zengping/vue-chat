@@ -21,8 +21,7 @@ app.prototype = {
     } else {
       s = `insert into user (username, password, nickname) values("${p.username}", "${p.password}", "${p.nickname}")`;
     }
-    r = await sql.query(s);
-    return r;
+    return await sql.query(s);
   }
 }
 
