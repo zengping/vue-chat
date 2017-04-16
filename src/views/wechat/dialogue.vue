@@ -10,9 +10,11 @@
       </div>
     </header>
     <section class="dialogue-section clearfix" v-on:click="MenuOutsideClick">
-      <div class="row clearfix" v-for="item in chatList.msg" v-if="chatList">
-        <img :src="item.header_url" class="header">
-        <p class="text" v-more>{{item.text}}</p>
+      <div class="row_bar" v-for="item in chatList.msg" v-if="chatList">
+        <div class="row clearfix" :class="{'showRight':item.mid == user.id}">
+          <img :src="item.header_url" class="header">
+          <p class="text" v-more>{{item.text}}</p>
+        </div>
       </div>
       <span class="msg-more" id="msg-more">
         <ul>
@@ -192,7 +194,8 @@ export default {
     sendMsg () {
       let chat = {from_id: this.user.id, to_id: this.contact_id, msg: this.newMsg}
       this.io.send(chat)
-      this.$store.commit('setChatList', chat)
+      this.$store.commit('setChatList2', chat)
+      this.chatList = this.$store.state.chatList[this.contact_id]
       this.clearSendStatus()
     },
     clearSendStatus () {
@@ -213,5 +216,37 @@ export default {
   @import "../../assets/css/dialogue.css";
   .say-active {
     background: #c6c7ca;
+  }
+  .dialogue-section .row_bar {
+    float: left;
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+  }
+  .dialogue-section .row {
+    margin: 0px;
+  }
+  .dialogue-section .showRight, .dialogue-section .showRight .header, .dialogue-section .showRight .text {
+    float: right;
+  }
+  .dialogue-section .showRight .text {
+    margin-right: 10px;
+    background-color: #1aad19;
+    color: #333;
+  }
+  .dialogue-section .showRight .text:before {
+    width: 0;
+    height: 0;
+    border: 0px;
+  }
+  .dialogue-section .showRight .text:after {
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: -12px;
+    top: 11px;
+    content: "";
+    border: 6px solid transparent;
+    border-left-color: #1aad19;
   }
 </style>

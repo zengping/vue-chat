@@ -8,6 +8,10 @@ import wechat from './wechat'
 import global from './global'
 import self from './self'
 import contact from './contact'
+import toast from './toast'
+import loading from './loading'
+import jalert from './jalert'
+import jconfirm from './jconfirm'
 
 Vue.use(Vuex)
 
@@ -22,6 +26,10 @@ status = objAdd(status, wechat)
 status = objAdd(status, global)
 status = objAdd(status, self)
 status = objAdd(status, contact)
+status = objAdd(status, toast)
+status = objAdd(status, loading)
+status = objAdd(status, jalert)
+status = objAdd(status, jconfirm)
 
 function objAdd (a, b) {
   Object.keys(a).forEach((o) => {

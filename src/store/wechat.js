@@ -1,14 +1,10 @@
 export default {
   state: {
-    chatList: {},
-    n: 0
+    chatList: {}
   },
   getters: {
     chatChange (state, cid) {
       return state.chatList[cid]
-    },
-    getN (state) {
-      return state.n
     }
   },
   mutations: {
@@ -27,8 +23,20 @@ export default {
         text: chat.msg
       })
     },
-    setN (state) {
-      state.n++
+    setChatList2 (state, chat) {
+      if (!state.chatList[chat.to_id]) {
+        state.chatList[chat.to_id] = {}
+      }
+      if (!state.chatList[chat.to_id].msg) {
+        state.chatList[chat.to_id].msg = []
+      }
+      state.chatList[chat.to_id].msg.push({
+        mid: chat.from_id,
+        name: chat.from_id,
+        header_url: chat.from_id,
+        date: new Date().getTime(),
+        text: chat.msg
+      })
     }
   },
   actions: {

@@ -1,16 +1,23 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import Login from './views/Login.vue'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
-import http from './http'
+import router from './router/login'
+import store from './store'
+import Toast from 'views/common/Toast'
+import Loading from 'views/common/Loading'
+import Jalert from 'views/common/Jalert'
+import Jconfirm from 'views/common/Jconfirm'
 
-Vue.use(ElementUI)
-Vue.prototype.$http = http
+Vue.config.productionTip = false // 将此值设置为 false ,会关闭 Vue 启动时的提示信息，推荐
 
 /* eslint-disable no-new */
 new Vue({
-  template: '<Login/>',
-  components: { Login }
+  router,
+  store: store,
+  components: {
+    Toast,
+    Loading,
+    Jalert,
+    Jconfirm
+  }
 }).$mount('#app')

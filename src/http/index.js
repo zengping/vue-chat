@@ -1,4 +1,5 @@
 import axios from 'axios'
+import store from '../store'
 export default {
   get (o) {
     o.type = 'get'
@@ -48,6 +49,7 @@ export default {
         params = o.params
       }
       axios[o.type](this.getUrl(o), params, config).then((res) => {
+        store.commit('hideLoading')
         if (res.data.status.code === 200) {
           resolve(res.data.data)
         } else {

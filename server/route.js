@@ -22,7 +22,7 @@ async function route(request, response) {
             response.okMsg.data = data;
         } catch(e) {
             response.serverStatus = 0;
-            response.errMsg.data = e;
+            response.errMsg.status.msg = e.message;
         }
         lib.render(response);
     } else {
