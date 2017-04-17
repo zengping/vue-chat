@@ -54,7 +54,6 @@
                 <span></span>
                 <span></span>
                 <span></span>
-                <span></span>
               </div>
             </div>
             <p>手指上划,取消发送</p>
