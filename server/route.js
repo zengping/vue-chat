@@ -13,18 +13,22 @@ async function route(request, response) {
     let action = routes[3];
     if (basePath == 'api' && ctrl && action && handle[ctrl] && handle[ctrl][action]) {
         response.writeHead(200, {"Content-Type": "application/json;charset=utf-8"});
-        try {
-            if (request.method == 'POST') {
-                request.postData = await lib.getPost(request);
+        if (ctrl === 'file') {
+            handle[ctrl][action](request, response, {routes, query});
+        } else {
+            try {
+                if (request.method == 'POST') {
+                    request.postData = await lib.getPost(request);
+                }
+                let data = await handle[ctrl][action](request, response, {routes, query});
+                response.serverStatus = 1;
+                response.okMsg.data = data;
+            } catch(e) {
+                response.serverStatus = 0;
+                response.errMsg.status.msg = e.message;
             }
-            let data = await handle[ctrl][action](request, response, {routes, query});
-            response.serverStatus = 1;
-            response.okMsg.data = data;
-        } catch(e) {
-            response.serverStatus = 0;
-            response.errMsg.status.msg = e.message;
+            lib.render(response);
         }
-        lib.render(response);
     } else {
         response.writeHead(404, {"Content-Type": "text/plain;charset=utf-8"});
         response.write("404 Not found");

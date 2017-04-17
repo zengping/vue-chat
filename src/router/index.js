@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import http from '../http'
 import socket from '../socket'
 import filters from '../filters'
+import directives from '../directives'
 import App from 'App'
 
 import Wechat from 'views/wechat/Wechat'
@@ -31,6 +32,7 @@ import Privacy from 'views/self/Privacy'
 
 Vue.use(Router)
 filters.init(Vue)
+directives.init(Vue)
 Vue.prototype.$http = http
 Vue.prototype.io = socket
 
