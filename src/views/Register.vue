@@ -38,7 +38,7 @@
           nickname: '',
           username: '',
           password: '',
-          header_url: './static/assets/images/default.png',
+          header_url: 'http://img.bta.one/assets/images/default/default.png',
           country: '中国',
           area: '北京'
         }
