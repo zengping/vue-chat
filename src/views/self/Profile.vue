@@ -10,12 +10,12 @@
             </div>
         </header>
         <div class="weui-cells">
-            <div class="weui-cell" id="avatarCell" v-image-upload>
+            <div class="weui-cell" id="avatarCell" v-on:click="uploadImg">
                 <div class="weui-cell__bd">
                     <p>头像</p>
                 </div>
                 <div class="weui-cell__ft">
-                    <img :src="user.header_url" style="width: 50px;height: 50px;border-radius: 4px;">
+                    <img :src="user.header_url" style="width: 50px;height: 50px;border-radius: 4px;" class="headerShow">
                 </div>
             </div>
             <div class="weui-cell">
@@ -103,6 +103,29 @@ export default {
   computed: {
     user () {
       return JSON.parse(sessionStorage.getItem('user'))
+    }
+  },
+  methods: {
+    uploadImg () {
+      let self = this
+      this.lib.upload(
+        {
+          callback (data) {
+            let params = {
+              id: self.user.id,
+              header_url: data
+            }
+            self.$http.post({api: '/api/user/editHeaderUrl/' + self.user.id, params}).then(data => {
+              if (data.affectedRows) {
+                self.lib.updateSession(self.user.id)
+                self.$store.commit('showToast')
+              }
+            }, (res) => {
+              self.$store.commit('setJalertText', res)
+            })
+          }
+        }
+      )
     }
   }
 }

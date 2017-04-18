@@ -1,7 +1,7 @@
 import io from '../../lib/socket.io'
 
 var Socket = function () {
-  this.server = io.connect('http://localhost:8886')
+  this.server = io.connect('http://chat.bta.one/socket')
 }
 
 Socket.prototype = {

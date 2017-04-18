@@ -14,7 +14,7 @@ app.prototype = {
     let day = ymd.getDate();
     day = day > 9 ? day : "0" + day;
     const Dir = "assets/images/" + year + month + day + "/";
-    const Host = "http://localhost:8081/server/";
+    const Host = "http://img.bta.one/";
 
     if (fs.existsSync(Dir)) {
     } else {
