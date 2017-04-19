@@ -17,7 +17,7 @@ app.prototype = {
     const Host = "http://img.bta.one/";
 
     if (!fs.exists(__dirname + "/" + Dir)) {
-        fs.mkdir(Dir);
+        fs.mkdir(__dirname + "/" + Dir);
     }
 
     var path = url.parse(request.url, true);
