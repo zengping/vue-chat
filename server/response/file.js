@@ -16,9 +16,9 @@ app.prototype = {
     const Dir = "assets/images/" + year + month + day + "/";
     const Host = "http://img.bta.one/";
 
-    if (!fs.existsSync(Dir)) {
-        fs.mkdirSync(Dir);
-    }
+    // if (!fs.existsSync(Dir)) {
+    //     fs.mkdirSync(Dir);
+    // }
 
     var path = url.parse(request.url, true);
     var query = path.query;
@@ -35,12 +35,15 @@ app.prototype = {
         bufferHelper.concat(chunck);
       });
       part.addListener('end', function () {
-        fs.writeFile(Dir + _fileName, bufferHelper.toBuffer(), { flag: 'a' });
-        response.write(JSON.stringify({status: {
-            code: 200,
-            msg: 'ok'
-        }, data: Host + Dir + _fileName}));
-        response.end();
+        fs.writeFile(Dir + _fileName, bufferHelper.toBuffer(), { flag: 'w' }, function (err) {
+           if (err) throw err;
+           console.log(err);
+            response.write(JSON.stringify({status: {
+                code: 200,
+                msg: 'ok'
+            }, data: Host + Dir + _fileName}));
+            response.end();
+        });
       });
     };
     return await form.parse(request, function(err, fields, files) {});
