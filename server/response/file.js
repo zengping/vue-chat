@@ -36,8 +36,10 @@ app.prototype = {
       });
       part.addListener('end', function () {
         fs.writeFile(Dir + _fileName, bufferHelper.toBuffer(), { flag: 'w' }, function (err) {
-           if (err) throw err;
-           console.log(err);
+            if (err) {
+                console.log(err);
+                throw new Error(err);
+            }
             response.write(JSON.stringify({status: {
                 code: 200,
                 msg: 'ok'
