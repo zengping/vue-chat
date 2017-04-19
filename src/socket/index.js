@@ -1,7 +1,7 @@
 import io from '../../lib/socket.io'
 
 var Socket = function () {
-  this.server = io.connect('http://socket.bta.one:8686')
+  this.server = io.connect('ws://socket.bta.one:8686')
 }
 
 Socket.prototype = {

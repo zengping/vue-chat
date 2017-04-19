@@ -69,7 +69,9 @@ io.sockets.on('connection', function (socket) {
   socket.on('chat', function (obj) {
     console.log(obj)
     // socket.emit('chat', obj);
-    socketsList[obj.to_id].emit('chat', obj)
+    if (socketsList[obj.to_id]) {
+      socketsList[obj.to_id].emit('chat', obj);
+    }
   });
 
 });
