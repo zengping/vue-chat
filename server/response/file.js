@@ -16,8 +16,7 @@ app.prototype = {
     const Dir = "assets/images/" + year + month + day + "/";
     const Host = "http://img.bta.one/";
 
-    if (fs.existsSync(Dir)) {
-    } else {
+    if (!fs.existsSync(Dir)) {
         fs.mkdirSync(Dir);
     }
 

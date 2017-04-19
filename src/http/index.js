@@ -57,6 +57,7 @@ export default {
           reject(res.data.status.msg)
         }
       }).catch((err) => {
+        store.commit('hideLoading')
         reject(err)
       })
     })
