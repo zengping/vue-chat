@@ -16,8 +16,8 @@ app.prototype = {
     const Dir = "assets/images/" + year + month + day + "/";
     const Host = "http://img.bta.one/";
 
-    if (!fs.exists(__dirname + "/" + Dir)) {
-        fs.mkdir(__dirname + "/" + Dir);
+    if (!fs.exists(request.rootPath + "/" + Dir)) {
+        fs.mkdir(request.rootPath + "/" + Dir);
     }
 
     var path = url.parse(request.url, true);
@@ -35,7 +35,7 @@ app.prototype = {
         bufferHelper.concat(chunck);
       });
       part.addListener('end', function () {
-        fs.writeFile(__dirname + "/" + Dir + _fileName, bufferHelper.toBuffer(), { flag: 'w' }, function (err) {
+        fs.writeFile(request.rootPath + "/" + Dir + _fileName, bufferHelper.toBuffer(), { flag: 'w' }, function (err) {
             if (err) {
                 console.log(err);
                 throw new Error(err);

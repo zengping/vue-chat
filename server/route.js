@@ -6,6 +6,7 @@ async function route(request, response) {
     var path = url.parse(request.url, true);
     var routes = path.pathname.split("/");
     var query = path.query;
+    request.rootPath = __dirname;
     response.okMsg = okMsg();
     response.errMsg = errMsg();
     let basePath = routes[1];
