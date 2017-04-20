@@ -16,8 +16,13 @@ app.prototype = {
     const Dir = "assets/images/" + year + month + day + "/";
     const Host = "http://img.bta.one/";
 
-    if (!fs.exists(request.rootPath + "/" + Dir)) {
-        fs.mkdir(request.rootPath + "/" + Dir);
+    let exists = await fs.existsSync(request.rootPath + "/" + Dir, function(exists){
+        return exists;
+    });
+    if (!exists) {
+        await fs.mkdirSync(request.rootPath + "/" + Dir, '0777', function(err){
+          return err;
+        });
     }
 
     var path = url.parse(request.url, true);
