@@ -9,7 +9,7 @@ export default {
     },
     {
       path: '/explore/moments',
-      component: Moments
+      components: { 'subPage': Moments }
     }
   ]
 }

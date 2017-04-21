@@ -102,7 +102,7 @@ export default {
   },
   computed: {
     user () {
-      return JSON.parse(sessionStorage.getItem('user'))
+      return this.$store.state.user
     }
   },
   methods: {

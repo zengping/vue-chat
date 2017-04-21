@@ -13,10 +13,10 @@
             <div class="home-pic-base">
                 <div class="top-pic">
                     <div class="top-pic-inner">
-                        <img src="https://sinacloud.net/vue-wechat/images/headers/header01.png">
+                        <img :src="user.header_url">
                     </div>
                 </div>
-                <div class="top-name _ellipsis">阿荡</div>
+                <div class="top-name _ellipsis">{{user.nickname}}</div>
             </div>
             <p class="sign">填坑小能手</p>
         </div>
@@ -72,7 +72,13 @@
 </template>
 
 <script>
-    export default {}
+export default {
+  computed: {
+    user () {
+      return this.$store.state.user
+    }
+  }
+}
 </script>
 
 <style>

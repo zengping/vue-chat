@@ -93,7 +93,7 @@ Libs.prototype = {
         store.commit('setJalertText', '用户信息错误！')
       } else {
         let user = data[0]
-        sessionStorage.setItem('user', JSON.stringify(user))
+        store.commit('setUser', user)
       }
     }, (res) => {
       store.commit('setJalertText', res)

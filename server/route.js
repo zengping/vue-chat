@@ -1,6 +1,7 @@
 var handle = require("./requestHandlers");
 var url = require("url");
 var lib = require("./lib");
+var myfile = require("./myfile");
 
 async function route(request, response) {
     var path = url.parse(request.url, true);
@@ -16,6 +17,7 @@ async function route(request, response) {
         response.writeHead(200, {"Content-Type": "application/json;charset=utf-8"});
         if (ctrl === 'file') {
             handle[ctrl][action](request, response, {routes, query});
+            return;
         } else {
             try {
                 if (request.method == 'POST') {
@@ -30,6 +32,9 @@ async function route(request, response) {
             }
             lib.render(response);
         }
+    } else if (basePath === 'assets') {
+        myfile.open(request, response);
+        return;
     } else {
         response.writeHead(404, {"Content-Type": "text/plain;charset=utf-8"});
         response.write("404 Not found");

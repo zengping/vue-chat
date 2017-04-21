@@ -85,14 +85,8 @@ export default {
   },
   computed: {
     user () {
-      return JSON.parse(sessionStorage.getItem('user'))
+      return this.$store.state.user
     }
-  },
-  mounted () {
-    this.$store.commit('toggleTipsStatus', -1)
-  },
-  activated () {
-    this.$store.commit('toggleTipsStatus', -1)
   }
 }
 </script>
