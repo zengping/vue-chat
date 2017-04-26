@@ -6,7 +6,7 @@ import Login from 'views/Login'
 import Register from 'views/Register'
 
 Vue.use(Router)
-Vue.prototype.$http = http
+Vue.use(http)
 
 export default new Router({
   mode: 'hash',

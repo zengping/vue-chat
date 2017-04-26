@@ -1,6 +1,9 @@
 import axios from 'axios'
 import store from '../store'
-export default {
+
+var Http = function () {}
+
+Http.prototype = {
   get (o) {
     o.type = 'get'
     return this.xhr(o)
@@ -61,5 +64,11 @@ export default {
         reject(err)
       })
     })
+  }
+}
+
+export default {
+  install (Vue, name = '$http') {
+    Object.defineProperty(Vue.prototype, name, {value: new Http()})
   }
 }

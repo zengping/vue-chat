@@ -10,9 +10,9 @@ import app from './default'
 Vue.use(Router)
 filters.init(Vue)
 directives.init(Vue)
-Vue.prototype.$http = http
-Vue.prototype.io = socket
-Vue.prototype.lib = lib
+Vue.use(http)
+Vue.use(socket)
+Vue.use(lib)
 
 let router = []
 app.router.forEach(function (route) {

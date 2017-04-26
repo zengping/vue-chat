@@ -47,7 +47,7 @@ export default {
       let user = sessionStorage.user ? JSON.parse(sessionStorage.user) : null
       if (user) {
         this.$store.commit('setUser', user)
-        this.io.login(user)
+        this.$io.login(user)
         this.getContacts()
         this.getChat()
       } else {
@@ -65,7 +65,7 @@ export default {
     },
     getChat () {
       let self = this
-      this.io.receive((chat) => {
+      this.$io.receive((chat) => {
         self.$store.commit('setChatList', chat)
       })
     }

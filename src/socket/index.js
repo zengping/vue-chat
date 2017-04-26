@@ -20,4 +20,8 @@ Socket.prototype = {
   }
 }
 
-export default new Socket()
+export default {
+  install (Vue, name = '$io') {
+    Object.defineProperty(Vue.prototype, name, {value: new Socket()})
+  }
+}

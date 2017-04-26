@@ -192,7 +192,7 @@ export default {
     },
     sendMsg () {
       let chat = {from_id: this.user.id, to_id: this.contact_id, msg: this.newMsg}
-      this.io.send(chat)
+      this.$io.send(chat)
       this.$store.commit('setChatList2', chat)
       this.chatList = this.$store.state.chatList[this.contact_id]
       this.clearSendStatus()
@@ -204,7 +204,7 @@ export default {
   },
   mounted () {
     let self = this
-    this.io.receive((chat) => {
+    this.$io.receive((chat) => {
       self.chatList = self.$store.state.chatList[self.contact_id]
     })
   }
