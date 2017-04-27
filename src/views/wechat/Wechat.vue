@@ -3,10 +3,7 @@
   <div id="wechat">
     <ul class="wechat-list">
       <!--props传递消息对象 baseMsgObj -->
-      <msg-item v-for="baseMsgObj in chatList"
-                :item="baseMsgObj"
-                class="list-row line-bottom"
-                :key="baseMsgObj.mid"></msg-item>
+      <msg-item v-for="item in chatList" :item="item" class="list-row line-bottom"></msg-item>
     </ul>
   </div>
 </template>
@@ -24,7 +21,8 @@ export default {
   },
   computed: {
     chatList () {
-      return this.$store.state.chatList
+      console.log(this.$store.state.chatList)
+      return Object.values(this.$store.state.chatList)
     }
   }
   // watch: {

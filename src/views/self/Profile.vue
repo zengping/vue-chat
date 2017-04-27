@@ -108,7 +108,7 @@ export default {
   methods: {
     uploadImg () {
       let self = this
-      this.lib.upload(
+      this.$lib.upload(
         {
           callback (data) {
             let params = {

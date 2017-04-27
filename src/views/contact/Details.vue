@@ -60,7 +60,7 @@
     <!--<a href="javascript:;"
        class="weui-btn weui-btn_primary"
        style="width:90%;margin-top:20px;">发消息</a>-->
-    <router-link :to="{ path: '/wechat/dialogue', query: { wxid: contactInfo.id,name:contactInfo.nickname, group_num:1}}" tag="div" class="list-info">
+    <router-link :to="{ path: '/wechat/dialogue', query: { wxid: contactInfo.id,name:contactInfo.nickname}}" tag="div" class="list-info">
       <button class="weui-btn weui-btn_primary" style="width:90%;margin-top:20px;">发消息</button>
     </router-link>
     <a href="javascript:;" class="weui-btn weui-btn_default" style="width:90%;margin-top:20px;">视频</a>

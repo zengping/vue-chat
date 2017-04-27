@@ -6,12 +6,12 @@
           <span>微信</span>
         </router-link>
         <span>{{pageName}}</span>
-        <span class="parentheses" v-show='$route.query.group_num&& $route.query.group_num!=1'>{{$route.query.group_num}}</span>
+        <!--<span class="parentheses" v-show='$route.query.group_num&& $route.query.group_num!=1'>{{$route.query.group_num}}</span>-->
       </div>
     </header>
     <section class="dialogue-section clearfix" v-on:click="MenuOutsideClick">
       <div class="row_bar" v-for="item in chatList.msg" v-if="chatList">
-        <div class="row clearfix" :class="{'showRight':item.mid == user.id}">
+        <div class="row clearfix" :class="{'showRight':item.wxid == user.id}">
           <img :src="item.header_url" class="header">
           <p class="text" v-more>{{item.text}}</p>
         </div>
