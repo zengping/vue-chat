@@ -66,7 +66,7 @@ export default {
     getChat () {
       let self = this
       this.$io.receive((chat) => {
-        self.$store.commit('setChatList', chat)
+        self.$store.dispatch('setChatList', chat)
       })
     }
   },

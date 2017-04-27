@@ -6,7 +6,7 @@
     <router-link :to="{ path: '/wechat/dialogue', query: { wxid: item.wxid,name:item.name}}" tag="div" class="list-info" v-swiper v-on:click.native="toggleMsgRead($event,'enter')">
       <div class="header-box">
         <!--未读并且未屏蔽 才显示新信息数量-->
-        <i class="new-msg-count" v-show="!read">{{item.msg.length}}</i>
+        <i class="new-msg-count" v-show="unRead > 0">{{unRead}}</i>
         <!--未读并且屏蔽 只显示小红点-->
         <!--<i class="new-msg-dot" v-show="!read"></i>-->
         <!--如果是私聊，只显示一个头像； 如果是群聊，则显示多个头像，flex 控制样式-->
@@ -41,8 +41,13 @@ export default {
   props: ['item'],
   data () {
     return {
-      read: true,
+      unRead: this.item.unRead,
       deleteMsg: false
+    }
+  },
+  computed: {
+    unReadTotal () {
+      return this.$store.state.unReadTotal
     }
   },
   methods: {
@@ -73,6 +78,9 @@ export default {
           this.$store.commit('minusNewMsg')
         }
       }
+    },
+    getUnRead () {
+      this.unRead = this.$store.state.chatList[this.item.wxid].unRead
     }
   },
   // 参考 https://vuefe.cn/v2/guide/custom-directive.html
@@ -136,6 +144,11 @@ export default {
           }
         }, false)
       }
+    }
+  },
+  watch: {
+    'unReadTotal' (val, oldVal) {
+      this.getUnRead()
     }
   }
 }

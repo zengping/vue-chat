@@ -2,7 +2,8 @@ import contact from './contact'
 
 export default {
   state: {
-    chatList: {}
+    chatList: {},
+    unReadTotal: 0
   },
   getters: {
     chatChange (state, cid) {
@@ -10,7 +11,24 @@ export default {
     }
   },
   mutations: {
-    setChatList (state, chat) {
+    computeRead (state) {
+      let unReadTotal = 0
+      Object.values(state.chatList).forEach((o) => {
+        let unRead = 0
+        o.msg.forEach((x) => {
+          if (x.unRead) {
+            unRead++
+          }
+        })
+        o.unRead = unRead
+        unReadTotal += unRead
+      })
+      state.unReadTotal = unReadTotal
+    }
+  },
+  actions: {
+    setChatList (context, chat) {
+      let state = context.state
       if (!state.chatList[chat.from_id]) {
         state.chatList[chat.from_id] = {}
       }
@@ -26,10 +44,12 @@ export default {
         header_url: contact.getters.getContact(state, chat.from_id).header_url,
         date: new Date().getTime(),
         text: chat.msg,
-        read: false
+        unRead: true
       })
+      context.commit('computeRead')
     },
-    setChatList2 (state, chat) {
+    setChatList2 (context, chat) {
+      let state = context.state
       if (!state.chatList[chat.to_id]) {
         state.chatList[chat.to_id] = {}
       }
@@ -45,10 +65,17 @@ export default {
         header_url: state.user.header_url,
         date: new Date().getTime(),
         text: chat.msg,
-        read: true
+        unRead: false
+      })
+      context.commit('computeRead')
+    },
+    changeUnRead (context, chat) {
+      let obj = context.state.chatList[chat.wxid]
+      context.state.unReadTotal -= obj.unRead
+      obj.unRead = 0
+      obj.msg.forEach((o) => {
+        o.unRead = false
       })
     }
-  },
-  actions: {
   }
 }

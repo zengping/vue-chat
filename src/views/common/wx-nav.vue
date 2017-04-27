@@ -2,8 +2,8 @@
   <div id="wx-nav">
 	<nav>
         <router-link to="/wechat" tag="dl" exact>
-            <dt class="iconfont icon-wechat" >
-                <i class="new-msg-count">2</i>
+            <dt class="iconfont icon-wechat">
+                <i class="new-msg-count" v-show="unReadTotal > 0">{{unReadTotal}}</i>
             </dt>
             <dd>微信</dd>
         </router-link>
@@ -15,7 +15,7 @@
         </router-link>
 		<router-link to="/explore" tag="dl">
             <dt class="iconfont icon-find" >
-                <i class="new-msg-dot"></i>
+                <!--<i class="new-msg-dot"></i>-->
             </dt>
             <dd>发现</dd>
         </router-link>
@@ -30,6 +30,13 @@
 </template>
 
 <script>
+export default {
+  computed: {
+    unReadTotal () {
+      return this.$store.state.unReadTotal
+    }
+  }
+}
 </script>
 
 <style>

@@ -20,14 +20,21 @@ export default {
       chatList: []
     }
   },
+  computed: {
+    unReadTotal () {
+      return this.$store.state.unReadTotal
+    }
+  },
   methods: {
     getChatList () {
-      console.log(this.$store.state.chatList)
       this.chatList = Object.values(this.$store.state.chatList)
     }
   },
   watch: {
     '$route' (to, from) {
+      this.getChatList()
+    },
+    'unReadTotal' (val, oldVal) {
       this.getChatList()
     }
   }
