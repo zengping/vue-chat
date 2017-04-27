@@ -1,7 +1,7 @@
 <template>
   <div id="wx-nav">
 	<nav>
-        <router-link to="/" tag="dl" exact>
+        <router-link to="/wechat" tag="dl" exact>
             <dt class="iconfont icon-wechat" >
                 <i class="new-msg-count">2</i>
             </dt>
